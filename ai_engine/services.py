@@ -7,7 +7,7 @@ import google.generativeai as genai
 BASE_URL = "https://api.nanoxlabs.com"
 AUTH_URL = f"{BASE_URL}/auth/token"
 MCP_URL = f"{BASE_URL}/coreapi/mcp"
-GEMINI_API_KEY = "AIzaSyAR8soMHRvaKOjArlvxiPzTpwgVylNlz0E"
+GEMINI_API_KEY = "AIzaSyA2wD-9kOz6A30bOXFRehSZKRXbPxgsHWE"
 GROUP_ID = "svvcms"
 
 
