@@ -278,7 +278,7 @@ form.addEventListener("submit", async (e) => {
         </div>
     `;
 
-    const res = await fetch("/api/chat/", {
+    const res = await fetch("/ai_engine/api/chat/", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
