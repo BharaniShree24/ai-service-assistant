@@ -2,7 +2,7 @@ import asyncio
 import json
 import requests
 from fastmcp import Client as MCPClient
-import google.generativeai as genai
+from google import genai
 
 BASE_URL = "https://api.nanoxlabs.com"
 AUTH_URL = f"{BASE_URL}/auth/token"
@@ -94,12 +94,15 @@ async def call_mcp(uid, token):
 
 # STEP 6: GEMINI SUMMARY
 async def summarize_with_gemini(text):
+    client = genai.Client(api_key=GEMINI_API_KEY)
 
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel('gemini-2.5-flash')
-
-    response = await model.generate_content_async(
-        "Summarize this MCP service data in clean bullet points:\n\n" + text
+    response = await client.aio.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=[
+            "Summarize this MCP service data in clean bullet points:",
+            text
+        ]
     )
+
     return response.text
 
