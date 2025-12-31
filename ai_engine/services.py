@@ -3,11 +3,19 @@ import json
 import requests
 from fastmcp import Client as MCPClient
 from google import genai
+import configparser
+import os
+
+config = configparser.ConfigParser()
+config.read(os.path.join(os.getcwd(), 'config.ini'))
+
+GEMINI_API_KEY = config['DEFAULT']['GEMINI_API_KEY']
+
 
 BASE_URL = "https://api.nanoxlabs.com"
 AUTH_URL = f"{BASE_URL}/auth/token"
 MCP_URL = f"{BASE_URL}/coreapi/mcp"
-GEMINI_API_KEY = "AIzaSyA2wD-9kOz6A30bOXFRehSZKRXbPxgsHWE"
+GEMINI_API_KEY = str(GEMINI_API_KEY)
 GROUP_ID = "svvcms"
 
 
@@ -93,16 +101,16 @@ async def call_mcp(uid, token):
 
 
 # STEP 6: GEMINI SUMMARY
-async def summarize_with_gemini(text):
-    client = genai.Client(api_key=GEMINI_API_KEY)
-
-    response = await client.aio.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[
-            "Summarize this MCP service data in clean bullet points:",
-            text
-        ]
-    )
-
-    return response.text
-
+# async def summarize_with_gemini(text):
+#     client = genai.Client(api_key=GEMINI_API_KEY)
+#
+#     response = await client.aio.models.generate_content(
+#         model="gemini-2.5-flash",
+#         contents=[
+#             "Summarize this MCP service data in clean bullet points:",
+#             text
+#         ]
+#     )
+#
+#     return response.text
+#

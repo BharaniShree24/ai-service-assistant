@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ERP AI Assistant</title>
+    <title>AI Assistant</title>
     <!-- ✅ YOUR CSS (unchanged) -->
     <style>
         * {
@@ -240,13 +240,13 @@
 
 <div class="chat-container">
     <div class="chat-header">
-        <h1>ERP AI Assistant</h1>
+        <h1> AI Assistant</h1>
     </div>
 
     <div class="chat-messages" id="chatBox">
         <div class="welcome-message">
-            <h2>Hello 👋</h2>
-            <p>Ask me about ERP, MCP, Loans, Attendance & more</p>
+            <h2>Hello I am Your AI Assitant👋</h2>
+            <p>Ask me </p>
         </div>
     </div>
 
@@ -263,6 +263,8 @@ const form = document.getElementById("chatForm");
 const chatBox = document.getElementById("chatBox");
 const message = document.getElementById("message");
 
+const CHAT_API_URL = "{% url 'chat_api' %}";
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -278,7 +280,7 @@ form.addEventListener("submit", async (e) => {
         </div>
     `;
 
-    const res = await fetch("/ai_engine/api/chat/", {
+    const res = await fetch(CHAT_API_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
