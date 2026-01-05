@@ -65,7 +65,7 @@ def get_cache_key(uid: str, question: str) -> str:
 # ==========================================================
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
-    google_api_key=str(GEMINI_API_KEY),
+    gemini_api_key=str(GEMINI_API_KEY),
     temperature=0.3
 )
 
