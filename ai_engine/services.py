@@ -6,11 +6,13 @@ from google import genai
 import configparser
 import os
 
+
 config = configparser.ConfigParser()
 config.read(os.path.join(os.getcwd(), 'config.ini'))
 
 GEMINI_API_KEY = config['DEFAULT']['GEMINI_API_KEY']
 
+# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 BASE_URL = "https://api.nanoxlabs.com"
 AUTH_URL = f"{BASE_URL}/auth/token"
@@ -25,7 +27,7 @@ def get_group_psk_id():
     response = requests.post(
         AUTH_URL,
         json={"secret_key": "O1eb30Fi9K8W7omT26vdVMzokpEvYxQZ"},
-        timeout=10
+        timeout=30
     )
     response.raise_for_status()
     token_data = response.json()
@@ -39,6 +41,8 @@ def get_group_psk_id():
     response.raise_for_status()
     groups = response.json().get("data", [])
     group = next((g for g in groups if g.get("group_id") == GROUP_ID), None)
+    print("GROUP:", group)
+
     if not group:
         raise Exception("❌ svvcms group not found")
     return group["psk_id"]
@@ -49,7 +53,7 @@ def get_svvcms_app_ids(group_psk_id):
     response = requests.post(
         AUTH_URL,
         json={"secret_key": "NUvE3Fzqq5S3MAuTQ2kMEtBS2Jqb2tD4"},
-        timeout=10
+        timeout=30
     )
     response.raise_for_status()
     token_data = response.json()
@@ -63,6 +67,7 @@ def get_svvcms_app_ids(group_psk_id):
     response = requests.get(url, json=payload, headers={"Authorization": auth_header}, timeout=10)
     response.raise_for_status()
     apps = response.json().get("data", [])
+    print("APPS:", apps)
     return [app["app_id"] for app in apps]
 
 
@@ -75,6 +80,8 @@ def get_secret_key_for_uid(uid, valid_app_ids):
     response.raise_for_status()
     tokens = response.json()
     token_record = next((t for t in tokens if t.get("uid") == uid and t.get("active") is True), None)
+    print("token_uid_data:", token_record)
+
     if not token_record:
         raise Exception("❌ No active token found for UID")
     return token_record["secret_key"]
@@ -99,7 +106,6 @@ async def call_mcp(uid, token):
         print("📥 Raw MCP Response:", text)
         return text
 
-
 # STEP 6: GEMINI SUMMARY
 # async def summarize_with_gemini(text):
 #     client = genai.Client(api_key=GEMINI_API_KEY)
@@ -113,4 +119,3 @@ async def call_mcp(uid, token):
 #     )
 #
 #     return response.text
-#

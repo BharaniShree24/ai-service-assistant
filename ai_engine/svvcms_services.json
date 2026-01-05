@@ -1,0 +1,199 @@
+{
+  "services": [
+    {
+      "name": "Winning Lottery Ticket (Astrology Services)",
+      "app_id": "svvcms39",
+      "keywords": ["winning lottery", "lottery ticket"]
+    },
+    {
+      "name": "Government Job Possibility (Astrology Services)",
+      "app_id": "svvcms15",
+      "keywords": ["government job", "govt job", "public service"]
+    },
+    {
+      "name": "Business or Work (Astrology Services)",
+      "app_id": "svvcms17",
+      "keywords": ["business problem", "work issue", "career problem"]
+    },
+    {
+      "name": "Buying Own House (Astrology Services)",
+      "app_id": "svvcms19",
+      "keywords": ["buy house", "own house"]
+    },
+    {
+      "name": "Buying Two / Four Wheeler (Astrology Services)",
+      "app_id": "svvcms21",
+      "keywords": ["buy vehicle", "car purchase", "two wheeler", "four wheeler"]
+    },
+    {
+      "name": "Ancestor Properties (Astrology Services)",
+      "app_id": "svvcms20",
+      "keywords": ["ancestor property", "ancestral property"]
+    },
+    {
+      "name": "Foreign Travel (Astrology Services)",
+      "app_id": "svvcms10",
+      "keywords": ["foreign travel", "international travel"]
+    },
+    {
+      "name": "Enter into Politics ? Best Period (Astrology Services)",
+      "app_id": "svvcms28",
+      "keywords": ["politics", "political career", "best time for politics"]
+    },
+    {
+      "name": "Get Bank Loan (Astrology Services)",
+      "app_id": "svvcms25",
+      "keywords": ["bank loan", "get loan", "loan"]
+    },
+    {
+      "name": "Best Stone recommendation (Astrology Services)",
+      "app_id": "svvcms35",
+      "keywords": ["best stone", "gem recommendation"]
+    },
+    {
+      "name": "Stay away from my family after marriage (Astrology Services)",
+      "app_id": "svvcms32",
+      "keywords": ["stay away from family", "after marriage problem"]
+    },
+    {
+      "name": "Become a Doctor (Astrology Services)",
+      "app_id": "svvcms29",
+      "keywords": ["become doctor", "medical career"]
+    },
+    {
+      "name": "Best time to Start a Diet (Astrology Services)",
+      "app_id": "svvcms30",
+      "keywords": ["start diet", "best time diet"]
+    },
+    {
+      "name": "Child Birth (Astrology Services)",
+      "app_id": "svvcms24",
+      "keywords": ["child birth", "baby birth"]
+    },
+    {
+      "name": "Pending Loans (Astrology Services)",
+      "app_id": "svvcms26",
+      "keywords": ["pending loan", "loan pending", "due loan", "loan issue"]
+    },
+    {
+      "name": "Anxiety related issues (Astrology Services)",
+      "app_id": "svvcms31",
+      "keywords": ["anxiety", "stress", "mental issues"]
+    },
+    {
+      "name": "Best Lucky number (Astrology Services)",
+      "app_id": "svvcms36",
+      "keywords": ["lucky number", "fortune number"]
+    },
+    {
+      "name": "Business Problem (Astrology Services)",
+      "app_id": "svvcms09",
+      "keywords": ["business loss", "business problem", "work issue"]
+    },
+    {
+      "name": "Marriage Problem (Astrology Services)",
+      "app_id": "svvcms11",
+      "keywords": ["marriage problem", "relationship problem"]
+    },
+    {
+      "name": "Negative Energy Removal (Astrology Services)",
+      "app_id": "svvcms13",
+      "keywords": ["negative energy", "remove energy"]
+    },
+    {
+      "name": "Become an Actor / Actress (Astrology Services)",
+      "app_id": "svvcms22",
+      "keywords": ["become actor", "actress career"]
+    },
+    {
+      "name": "Get Teaching Profession (Astrology Services)",
+      "app_id": "svvcms33",
+      "keywords": ["teaching profession", "teacher career"]
+    },
+    {
+      "name": "Donation Datastore",
+      "app_id": "svvcms06",
+      "keywords": ["donation"]
+    },
+    {
+      "name": "Live Stream Datastore",
+      "app_id": "svvcms05",
+      "keywords": ["live stream"]
+    },
+    {
+      "name": "Best Name suits for Successful career (Astrology Services)",
+      "app_id": "svvcms37",
+      "keywords": ["best name", "career name"]
+    },
+    {
+      "name": "Best Investment Period (Astrology Services)",
+      "app_id": "svvcms14",
+      "keywords": ["investment period", "best time to invest"]
+    },
+    {
+      "name": "My Promotion / Increments (Astrology Services)",
+      "app_id": "svvcms23",
+      "keywords": ["promotion", "salary increment"]
+    },
+    {
+      "name": "Health Problem (Astrology Services)",
+      "app_id": "svvcms08",
+      "keywords": ["health problem", "illness", "disease"]
+    },
+    {
+      "name": "Clear School Education or College Education (Astrology Services)",
+      "app_id": "svvcms27",
+      "keywords": ["education clearance", "school completion", "college completion"]
+    },
+    {
+      "name": "Children Education (Astrology Services)",
+      "app_id": "svvcms38",
+      "keywords": ["children education", "kids education"]
+    },
+    {
+      "name": "Love Problem (Astrology Services)",
+      "app_id": "svvcms07",
+      "keywords": ["love problem", "relationship issue", "breakup"]
+    },
+    {
+      "name": "Legal Problem (Astrology Services)",
+      "app_id": "svvcms16",
+      "keywords": ["legal problem", "law issue"]
+    },
+    {
+      "name": "Forgot Password",
+      "app_id": "svvcms42",
+      "keywords": ["forgot password", "reset password"]
+    },
+    {
+      "name": "Divorce Problem (Astrology Services)",
+      "app_id": "svvcms12",
+      "keywords": ["divorce problem", "separation issue"]
+    },
+    {
+      "name": "Astrology Master Services Datastore",
+      "app_id": "svvcms04",
+      "keywords": ["astrology master", "astrology service"]
+    },
+    {
+      "name": "Spiritual Inclination (Astrology Services)",
+      "app_id": "svvcms18",
+      "keywords": ["spiritual inclination", "spirituality"]
+    },
+    {
+      "name": "Support from Children at Old age or Stay at Old Age Homes (Astrology Services)",
+      "app_id": "svvcms34",
+      "keywords": ["children support old age", "old age home"]
+    },
+    {
+      "name": "Welcome Email and Sign In",
+      "app_id": "svvcms43",
+      "keywords": ["welcome email", "sign in"]
+    },
+    {
+      "name": "employee",
+      "app_id": "svvcms54",
+      "keywords": ["employee"]
+    }
+  ]
+}
