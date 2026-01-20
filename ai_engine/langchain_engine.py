@@ -105,7 +105,7 @@ def run_langchain(uid: str, mcp_data: str, user_question: str) -> str:
     """
 
     # ----------------------------
-    # 1️⃣ Cache check
+    #1️⃣ Cache check
     # ----------------------------
     cache_key = get_cache_key(uid, user_question)
     cached_reply = cache.get(cache_key)

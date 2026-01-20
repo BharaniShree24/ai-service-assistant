@@ -6,7 +6,6 @@ from google import genai
 import configparser
 import os
 
-
 config = configparser.ConfigParser()
 config.read(os.path.join(os.getcwd(), 'config.ini'))
 
@@ -41,7 +40,7 @@ def get_group_psk_id():
     response.raise_for_status()
     groups = response.json().get("data", [])
     group = next((g for g in groups if g.get("group_id") == GROUP_ID), None)
-    print("GROUP:", group)
+    # print("GROUP:", group)
 
     if not group:
         raise Exception("❌ svvcms group not found")
@@ -67,7 +66,7 @@ def get_svvcms_app_ids(group_psk_id):
     response = requests.get(url, json=payload, headers={"Authorization": auth_header}, timeout=10)
     response.raise_for_status()
     apps = response.json().get("data", [])
-    print("APPS:", apps)
+    # print("APPS:", apps)
     return [app["app_id"] for app in apps]
 
 
@@ -80,7 +79,7 @@ def get_secret_key_for_uid(uid, valid_app_ids):
     response.raise_for_status()
     tokens = response.json()
     token_record = next((t for t in tokens if t.get("uid") == uid and t.get("active") is True), None)
-    print("token_uid_data:", token_record)
+    # print("token_uid_data:", token_record)
 
     if not token_record:
         raise Exception("❌ No active token found for UID")
@@ -91,19 +90,45 @@ def get_secret_key_for_uid(uid, valid_app_ids):
 def generate_access_token(secret_key):
     res = requests.post(AUTH_URL, json={"secret_key": secret_key}, timeout=10)
     res.raise_for_status()
-    print("🔐 Token Generated Successfully")
+    # print("🔐 Token Generated Successfully")
     return res.json()["access_token"]
 
 
 # STEP 5: MCP CALL
+# async def call_mcp(uid, token):
+#     async with MCPClient(MCP_URL, auth=token) as client:
+#         print(f"✅ MCP Connected for UID: {uid}")
+#         payload = {"uid": uid, "data": {}}
+#         result = await client.call_tool("post_execute_python_file", payload)
+#         content = getattr(result, "content", None)
+#         text = content[0].text if content else str(result)
+#         print("📥 Raw MCP Response:", text)
+#         return text
+
+
 async def call_mcp(uid, token):
     async with MCPClient(MCP_URL, auth=token) as client:
-        print(f"✅ MCP Connected for UID: {uid}")
+        # print(f"✅ MCP Connected for UID: {uid}")
+
         payload = {"uid": uid, "data": {}}
         result = await client.call_tool("post_execute_python_file", payload)
+
+        # ---- SAFELY extract text ----
         content = getattr(result, "content", None)
-        text = content[0].text if content else str(result)
-        print("📥 Raw MCP Response:", text)
+
+        if not content:
+            # print("⚠️ MCP returned no content")
+            return "No MCP data available for this service."
+
+        first = content[0]
+
+        text = getattr(first, "text", None)
+
+        if not text:
+            # print("⚠️ MCP content.text is empty or None")
+            return "No MCP data available for this service."
+
+        # print("📥 Raw MCP Response:", text)
         return text
 
 # STEP 6: GEMINI SUMMARY
