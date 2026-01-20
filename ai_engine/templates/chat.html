@@ -233,6 +233,38 @@
             .chat-container { max-width: 95%; height: 90vh; }
             .chat-messages { padding: 12px; }
         }
+
+        .plus-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #e5e7eb;
+    color: #111827;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.plus-btn:hover {
+    background: #d1d5db;
+}
+
+.user-input {
+    flex: 1;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    transition: all 0.3s ease;
+    background: #f9fafb;
+    color: #111827;
+    resize: none;
+    overflow-y: auto;
+}
+
     </style>
 
 </head>
@@ -250,46 +282,109 @@
         </div>
     </div>
 
-    <div class="chat-input-container">
-        <form class="chat-form" id="chatForm">
-            <input class="user-input" id="message" placeholder="Enter UID (ex: svvcms26)" />
-            <button class="submit-btn">Send</button>
-        </form>
-    </div>
+<div class="chat-input-container">
+    <form class="chat-form" id="chatForm" enctype="multipart/form-data">
+
+        <!-- PDF Upload (Optional) -->
+        <button type="button" id="plusBtn" class="plus-btn">+</button>
+
+            <input
+        type="file"
+        id="pdfFile"
+        name="document"
+        accept=".pdf"
+        hidden
+    />
+
+
+        <!-- User Message / UID / Question -->
+        <textarea
+        class="user-input"
+        id="message"
+        name="message"
+        placeholder="Enter UID or ask a question..."
+        rows="1"
+        required
+    ></textarea>
+
+
+        <!-- Send Button -->
+        <button class="submit-btn" type="submit">Send</button>
+
+    </form>
+</div>
+
 </div>
 
 <script>
 const form = document.getElementById("chatForm");
 const chatBox = document.getElementById("chatBox");
 const message = document.getElementById("message");
+const pdfFile = document.getElementById("pdfFile");
 
 const CHAT_API_URL = "{% url 'chat_api' %}";
+const PDF_CHAT_API_URL = "{% url 'pdf_chat_api' %}";
+
+const plusBtn = document.getElementById("plusBtn");
+
+plusBtn.addEventListener("click", () => {
+    pdfFile.click();
+});
+
+pdfFile.addEventListener("change", () => {
+    if (pdfFile.files.length > 0) {
+        // Show PDF name in the input box
+        message.value = `📄 ${pdfFile.files[0].name}`;
+    }
+});
+
+
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const msg = message.value.trim();
-    if (!msg) return;
+    const file = pdfFile.files[0];
+
+    if (!msg && !file) return;
 
     message.value = "";
 
     chatBox.innerHTML += `
         <div class="message user-message">
             <div class="message-avatar user-avatar">U</div>
-            <div class="message-content user-content">${msg}</div>
+            <div class="message-content user-content">
+    ${msg ? msg : `📄 ${file.name}`}
+</div>
+
         </div>
     `;
 
-    const res = await fetch(CHAT_API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": "{{ csrf_token }}"
-        },
-        body: new URLSearchParams({ message: msg })
-    });
+    let response;
 
-    const data = await res.json();
+    if (file) {
+        // 📄 PDF CHAT MODE
+        const formData = new FormData();
+        formData.append("question", msg);
+        formData.append("document", file);
+
+        response = await fetch(PDF_CHAT_API_URL, {
+            method: "POST",
+            body: formData
+        });
+    } else {
+        // 🤖 NORMAL CHAT MODE (UNCHANGED)
+        response = await fetch(CHAT_API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: new URLSearchParams({ message: msg })
+        });
+    }
+
+    const data = await response.json();
 
     chatBox.innerHTML += `
         <div class="message">
@@ -300,6 +395,16 @@ form.addEventListener("submit", async (e) => {
 
     chatBox.scrollTop = chatBox.scrollHeight;
 });
+
+message.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+        // Enter pressed without Shift → send message
+        e.preventDefault();
+        form.requestSubmit(); // triggers your existing submit handler
+    }
+    // Shift + Enter → creates a new line (default behavior)
+});
+
 </script>
 
 
